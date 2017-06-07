@@ -1,12 +1,11 @@
 package com.vlstr.fluentappbarexample;
 
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,12 +14,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        View bottomSheet = findViewById(R.id.bottom_sheet);
-        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        bottomSheetBehavior.setPeekHeight((int) getResources().getDimension(R.dimen.bar_height));
+        setupFluentAppBar();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.menu_items_recyler);
+    }
+
+    private void setupFluentAppBar() {
+        FluentAppBar fluentAppBar = (FluentAppBar) findViewById(R.id.fluent_app_bar);
+        RecyclerView recyclerView = fluentAppBar.getSecondaryMenuItemsRecycler();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         MenuItemsAdapter adapter = new MenuItemsAdapter(this, new View.OnClickListener() {
             @Override
@@ -29,5 +29,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+
+        Drawable d = getResources().getDrawable(R.drawable.ellipsis1, null);
+        String yo = "Amazingness";
+        fluentAppBar.setMainMenuItemsContent(yo, d, yo, d, yo, d, yo, d);
     }
 }
