@@ -7,7 +7,7 @@
     tools:context="com.vlstr.fluentappbarexample.MainActivity">
 
     <com.vlstr.fluentappbarexample.FluentAppBar
-        android:id="@+id/bottom_sheet"
+        android:id="@+id/fluent_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior">

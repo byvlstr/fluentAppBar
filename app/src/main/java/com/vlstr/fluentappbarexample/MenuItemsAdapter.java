@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -28,8 +27,8 @@ public class MenuItemsAdapter extends RecyclerView.Adapter<MenuItemsAdapter.Menu
 
         this.onClickListener = onClickListener;
 
-        TypedArray icons = context.getResources().obtainTypedArray(R.array.fluent_app_bar_icons);
-        TypedArray labels = context.getResources().obtainTypedArray(R.array.fluent_app_bar_labels);
+        TypedArray icons = context.getResources().obtainTypedArray(R.array.fluent_app_bar_secondary_menu_icons);
+        TypedArray labels = context.getResources().obtainTypedArray(R.array.fluent_app_bar_secondary_menu_labels);
 
         this.items = new HashMap<>();
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="fluent_app_bar_icons">
+    <array name="fluent_app_bar_secondary_menu_icons">
         <item>@drawable/ellipsis1</item>
         <item>@drawable/more</item>
     </array>
-    <array name="fluent_app_bar_labels">
+    <array name="fluent_app_bar_secondary_menu_labels">
         <item>Ellipsis</item>
         <item>More</item>
     </array>
