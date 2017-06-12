@@ -22,15 +22,10 @@ public class MainActivity extends AppCompatActivity {
         FluentAppBar fluentAppBar = (FluentAppBar) findViewById(R.id.fluent_app_bar);
         RecyclerView recyclerView = fluentAppBar.getSecondaryMenuItemsRecycler();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        MenuItemsAdapter adapter = new MenuItemsAdapter(this, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        MenuSecondaryItemsAdapter adapter = new MenuSecondaryItemsAdapter(this, R.menu.fluent_app_bar_main_menu);
         recyclerView.setAdapter(adapter);
 
-        Drawable d = getResources().getDrawable(R.drawable.ellipsis1, null);
+        Drawable d = getResources().getDrawable(R.drawable.ellipsis1);
         String yo = "Amazingness";
         fluentAppBar.setMainMenuItemsContent(yo, d, yo, d, yo, d, yo, d);
     }

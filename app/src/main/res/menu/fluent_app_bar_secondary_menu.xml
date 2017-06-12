@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ellipsis1"
+        android:id="@+id/ellipsis"
+        android:title="Beautiful" />
+
+    <item
+        android:icon="@drawable/more"
+        android:id="@+id/more"
+        android:title="people" />
+
+    <item
+        android:icon="@drawable/more"
+        android:id="@+id/more2"
+        android:title="Oh oh oh" />
+</menu>

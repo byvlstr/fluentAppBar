@@ -18,9 +18,7 @@ import android.widget.TextView;
  * Created by Valentin on 16/05/2017.
  */
 
-//TODO config if 3 or 4 items
-//  TODO blur on touch
-// TODO colour shift on black background
+
 public class FluentAppBar extends NestedScrollView {
 
     private TextView label1View;
