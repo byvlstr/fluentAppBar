@@ -1,6 +1,7 @@
 package com.vlstr.fluentappbarexample;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -27,6 +28,8 @@ public class FluentAppBar extends NestedScrollView {
 
     private BottomSheetBehavior bottomSheetBehavior;
 
+    private int backgroundColour;
+
     private OnClickListener onMoreClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -37,8 +40,6 @@ public class FluentAppBar extends NestedScrollView {
         }
     };
 
-    private int numItems = 3; //DEFAULT
-
     public FluentAppBar(Context context) {
         super(context);
         init();
@@ -46,25 +47,25 @@ public class FluentAppBar extends NestedScrollView {
 
     public FluentAppBar(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
-    }
 
-    public FluentAppBar(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.FluentAppBar, 0, 0);
+        try {
+            backgroundColour = a.getColor(R.styleable.FluentAppBar_fluent_background, Color.WHITE);
+        } finally {
+            a.recycle();
+        }
+
         init();
     }
 
     private void init() {
         setClipToPadding(true);
-        setBackgroundColor(Color.WHITE);
-        CoordinatorLayout.LayoutParams layoutParams =
-                new CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        setBackgroundColor(backgroundColour);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             setElevation(getResources().getDimension(R.dimen.bar_elevation));
 
         LayoutInflater.from(getContext()).inflate(R.layout.content_app_bar, this, true);
-        initViews();
 
     }
 
@@ -81,12 +82,6 @@ public class FluentAppBar extends NestedScrollView {
         moreIcon.setOnClickListener(onMoreClickListener);
     }
 
-    private void initViews() {
-    }
-
-    public int getNumItems() {
-        return numItems;
-    }
 
     public RecyclerView getMenuNavigationItemsRecycler() {
         return (RecyclerView) findViewById(R.id.nav_items_recycler);
@@ -94,6 +89,14 @@ public class FluentAppBar extends NestedScrollView {
 
     public RecyclerView getSecondaryMenuItemsRecycler() {
         return (RecyclerView) findViewById(R.id.secondary_menu_items_recyler);
+    }
+
+    public int getBackgroundColour() {
+        return backgroundColour;
+    }
+
+    public void setBackgroundColour(int backgroundColour) {
+        this.backgroundColour = backgroundColour;
     }
 }
 
