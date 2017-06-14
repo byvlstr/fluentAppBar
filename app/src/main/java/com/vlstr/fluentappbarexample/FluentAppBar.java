@@ -97,6 +97,7 @@ public class FluentAppBar extends NestedScrollView {
 
     public void setBackgroundColour(int backgroundColour) {
         this.backgroundColour = backgroundColour;
+        this.setBackgroundColor(backgroundColour);
     }
 }
 
