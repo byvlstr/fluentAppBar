@@ -22,9 +22,11 @@ public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondar
 
     private Context context;
     private ArrayList<MenuEntry> itemss;
+    private View.OnClickListener onClickListener;
 
-    public MenuSecondaryItemsAdapter(Context context, @MenuRes int secondaryMenuId) {
+    public MenuSecondaryItemsAdapter(Context context, @MenuRes int secondaryMenuId, View.OnClickListener onClickListener) {
         this.context = context;
+        this.onClickListener = onClickListener;
         this.itemss = new ArrayList<>();
 
         parseMenu(secondaryMenuId);
@@ -41,8 +43,9 @@ public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondar
     public void onBindViewHolder(MenuItem holder, int position) {
         holder.label.setText(itemss.get(position).getTitle());
         holder.icon.setImageDrawable(itemss.get(position).getIcon());
+        holder.itemView.setTag(itemss.get(position).getResId());
 
-        //TODO holder.itemView.setOnClickListener(onClickListener);
+        holder.itemView.setOnClickListener(onClickListener);
     }
 
     @Override

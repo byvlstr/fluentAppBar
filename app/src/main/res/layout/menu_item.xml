@@ -6,7 +6,9 @@
     android:orientation="horizontal"
     android:padding="5dp"
     android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingRight="10dp"
+    android:clickable="true"
+    android:background="?android:attr/selectableItemBackground">
 
 
     <ImageView
