@@ -29,7 +29,7 @@ public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondar
         this.onClickListener = onClickListener;
         this.itemss = new ArrayList<>();
 
-        parseMenu(secondaryMenuId);
+        MenuParserHelper.parseMenu(context, secondaryMenuId, itemss);
     }
 
     @Override
@@ -53,16 +53,6 @@ public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondar
         return itemss.size();
     }
 
-    private void parseMenu(@MenuRes int menuRes) {
-        PopupMenu p = new PopupMenu(context, null);
-        Menu menu = p.getMenu();
-        new MenuInflater(context).inflate(menuRes, menu);
-
-        for (int i = 0; i < menu.size(); i++) {
-            android.view.MenuItem item = menu.getItem(i);
-            itemss.add(new MenuEntry(item.getTitle().toString(), item.getIcon(), item.getItemId()));
-        }
-    }
 
     class MenuItem extends RecyclerView.ViewHolder {
         ImageView icon;

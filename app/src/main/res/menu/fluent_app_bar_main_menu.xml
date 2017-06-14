@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:icon="@drawable/ellipsis1"
-        android:id="@+id/ellipsis"
+        android:id="@+id/nav_ellipsis"
         android:title="ellipsis" />
 
     <item
         android:icon="@drawable/more"
-        android:id="@+id/more"
+        android:id="@+id/nav_more"
         android:title="More" />
 
     <item
         android:icon="@drawable/more"
-        android:id="@+id/more2"
+        android:id="@+id/nav_more2"
         android:title="More 2" />
 </menu>

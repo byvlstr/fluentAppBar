@@ -2,6 +2,7 @@ package com.vlstr.fluentappbarexample;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.design.widget.BottomSheetBehavior;
@@ -10,6 +11,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,16 +23,19 @@ import android.widget.TextView;
 
 public class FluentAppBar extends NestedScrollView {
 
-    private TextView label1View;
-    private TextView label2View;
-    private TextView label3View;
-    private TextView label4View;
-    private ImageView icon1View;
-    private ImageView icon2View;
-    private ImageView icon3View;
-    private ImageView icon4View;
+    public static final String MORE_ICON_TAG = "more_icon_tag";
 
     private BottomSheetBehavior bottomSheetBehavior;
+
+    private OnClickListener onMoreClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED)
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            else
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+    };
 
     private int numItems = 3; //DEFAULT
 
@@ -69,62 +74,22 @@ public class FluentAppBar extends NestedScrollView {
 
         bottomSheetBehavior = BottomSheetBehavior.from(this);
         bottomSheetBehavior.setPeekHeight((int) getResources().getDimension(R.dimen.bar_height));
+        bottomSheetBehavior.setHideable(false);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        View moreIcon = findViewWithTag(MORE_ICON_TAG);
+        moreIcon.setOnClickListener(onMoreClickListener);
     }
 
     private void initViews() {
-        label1View = (TextView) findViewById(R.id.label1);
-        label2View = (TextView) findViewById(R.id.label2);
-        label3View = (TextView) findViewById(R.id.label3);
-        label4View = (TextView) findViewById(R.id.label4);
-        icon1View = (ImageView) findViewById(R.id.icon1);
-        icon2View = (ImageView) findViewById(R.id.icon2);
-        icon3View = (ImageView) findViewById(R.id.icon3);
-        icon4View = (ImageView) findViewById(R.id.icon4);
-    }
-
-    public void setMainMenuItemsContent(String label1, Drawable icon1, String label2, Drawable icon2, String label3, Drawable icon3) {
-        label1View.setText(label1);
-        icon1View.setImageDrawable(icon1);
-        label3View.setText(label2);
-        icon3View.setImageDrawable(icon2);
-        label4View.setText(label3);
-        icon4View.setImageDrawable(icon3);
-
-        label2View.setVisibility(GONE);
-        icon2View.setVisibility(GONE);
-        numItems = 3;
-    }
-
-    public void setMainMenuItemsContent(String label1, Drawable icon1, String label2, Drawable icon2,
-                                        String label3, Drawable icon3, String label4, Drawable icon4) {
-        label1View.setText(label1);
-        icon1View.setImageDrawable(icon1);
-        label2View.setText(label2);
-        icon2View.setImageDrawable(icon2);
-        label3View.setText(label3);
-        icon3View.setImageDrawable(icon3);
-        label4View.setText(label4);
-        icon4View.setImageDrawable(icon4);
-
-        label2View.setVisibility(VISIBLE);
-        icon2View.setVisibility(VISIBLE);
-        numItems = 4;
-    }
-
-    public void setNumItems(int numItems) {
-        this.numItems = numItems;
-        if (numItems == 3) {
-            label2View.setVisibility(GONE);
-            icon2View.setVisibility(GONE);
-        } else if (numItems == 4) {
-            label2View.setVisibility(VISIBLE);
-            icon2View.setVisibility(VISIBLE);
-        }
     }
 
     public int getNumItems() {
         return numItems;
+    }
+
+    public RecyclerView getMenuNavigationItemsRecycler() {
+        return (RecyclerView) findViewById(R.id.nav_items_recycler);
     }
 
     public RecyclerView getSecondaryMenuItemsRecycler() {

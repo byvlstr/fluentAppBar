@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,28 +23,40 @@ public class MainActivity extends AppCompatActivity {
         FluentAppBar fluentAppBar = (FluentAppBar) findViewById(R.id.fluent_app_bar);
         RecyclerView recyclerView = fluentAppBar.getSecondaryMenuItemsRecycler();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int resId = (int) v.getTag();
-                switch (resId){
-                    case R.id.menu_more:
-                        Toast.makeText(MainActivity.this, "More", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.menu_ellipsis:
-                        Toast.makeText(MainActivity.this, "Ellipsis", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.menu_more2:
-                        Toast.makeText(MainActivity.this, "More 2", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        };
-        MenuSecondaryItemsAdapter adapter = new MenuSecondaryItemsAdapter(this, R.menu.fluent_app_bar_secondary_menu, onClickListener);
+        MenuSecondaryItemsAdapter adapter = new MenuSecondaryItemsAdapter(this, R.menu.fluent_app_bar_secondary_menu, this);
         recyclerView.setAdapter(adapter);
 
-        Drawable d = getResources().getDrawable(R.drawable.ellipsis1);
-        String yo = "Amazingness";
-        fluentAppBar.setMainMenuItemsContent(yo, d, yo, d, yo, d, yo, d);
+        RecyclerView navItems = fluentAppBar.getMenuNavigationItemsRecycler();
+        navItems.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        MenuNavigationItemsAdapter menuNavigationItemsAdapter = new MenuNavigationItemsAdapter(this, R.menu.fluent_app_bar_main_menu, this);
+        navItems.setAdapter(menuNavigationItemsAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int resId = (int) v.getTag();
+        switch (resId){
+            //Navigation Menu
+            case R.id.nav_ellipsis:
+                Toast.makeText(MainActivity.this, "ELLIPSIS", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_more:
+                Toast.makeText(MainActivity.this, "MORE", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_more2:
+                Toast.makeText(MainActivity.this, "MORE 2", Toast.LENGTH_SHORT).show();
+                break;
+
+            // Secondary Menu
+            case R.id.menu_more:
+                Toast.makeText(MainActivity.this, "More", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.menu_ellipsis:
+                Toast.makeText(MainActivity.this, "Ellipsis", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.menu_more2:
+                Toast.makeText(MainActivity.this, "More 2", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }
