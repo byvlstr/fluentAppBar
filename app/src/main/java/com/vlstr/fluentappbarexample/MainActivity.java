@@ -21,15 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setupFluentAppBar() {
         FluentAppBar fluentAppBar = (FluentAppBar) findViewById(R.id.fluent_app_bar);
-        RecyclerView recyclerView = fluentAppBar.getSecondaryMenuItemsRecycler();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        MenuSecondaryItemsAdapter adapter = new MenuSecondaryItemsAdapter(this, R.menu.fluent_app_bar_secondary_menu, this);
-        recyclerView.setAdapter(adapter);
-
-        RecyclerView navItems = fluentAppBar.getMenuNavigationItemsRecycler();
-        navItems.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        MenuNavigationItemsAdapter menuNavigationItemsAdapter = new MenuNavigationItemsAdapter(this, R.menu.fluent_app_bar_main_menu, this);
-        navItems.setAdapter(menuNavigationItemsAdapter);
+        fluentAppBar.setNavigationMenu(R.menu.fluent_app_bar_main_menu, this);
+        fluentAppBar.setSecondaryMenu(R.menu.fluent_app_bar_secondary_menu, this);
     }
 
     @Override

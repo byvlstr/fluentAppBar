@@ -10,7 +10,8 @@
         android:id="@+id/fluent_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:fluent_background="@color/colorAccent"
+        app:fluent_background_colour="@color/colorAccent"
+        app:fluent_foreground_colour="#ffffff"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
     </com.vlstr.fluentappbarexample.FluentAppBar>

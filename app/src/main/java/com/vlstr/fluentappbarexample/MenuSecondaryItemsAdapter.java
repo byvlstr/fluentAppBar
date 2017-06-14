@@ -2,11 +2,8 @@ package com.vlstr.fluentappbarexample;
 
 import android.content.Context;
 import android.support.annotation.MenuRes;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,12 +18,15 @@ import java.util.ArrayList;
 public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondaryItemsAdapter.MenuItem> {
 
     private Context context;
-    private ArrayList<MenuEntry> itemss;
     private View.OnClickListener onClickListener;
+    private int foregroundColour;
 
-    public MenuSecondaryItemsAdapter(Context context, @MenuRes int secondaryMenuId, View.OnClickListener onClickListener) {
+    private ArrayList<MenuEntry> itemss;
+
+    public MenuSecondaryItemsAdapter(Context context, @MenuRes int secondaryMenuId, View.OnClickListener onClickListener, int foregroundColour) {
         this.context = context;
         this.onClickListener = onClickListener;
+        this.foregroundColour = foregroundColour;
         this.itemss = new ArrayList<>();
 
         MenuParserHelper.parseMenu(context, secondaryMenuId, itemss);
@@ -42,7 +42,9 @@ public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondar
     @Override
     public void onBindViewHolder(MenuItem holder, int position) {
         holder.label.setText(itemss.get(position).getTitle());
+        holder.label.setTextColor(foregroundColour);
         holder.icon.setImageDrawable(itemss.get(position).getIcon());
+        holder.icon.setColorFilter(foregroundColour);
         holder.itemView.setTag(itemss.get(position).getResId());
 
         holder.itemView.setOnClickListener(onClickListener);

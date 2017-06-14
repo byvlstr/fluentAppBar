@@ -23,13 +23,14 @@ public class MenuNavigationItemsAdapter extends RecyclerView.Adapter<MenuNavigat
 
     private Context context;
     private View.OnClickListener onClickListener;
+    private int foregroundColour;
 
     private List<MenuEntry> navItems;
-    private View moreIcon;
 
-    public MenuNavigationItemsAdapter(Context context, @MenuRes int menuRes, View.OnClickListener onClickListener) {
+    public MenuNavigationItemsAdapter(Context context, @MenuRes int menuRes, View.OnClickListener onClickListener, int foregroundColour) {
         this.context = context;
         this.onClickListener = onClickListener;
+        this.foregroundColour = foregroundColour;
         this.navItems = new ArrayList<>();
 
         populateNavigationItems(menuRes);
@@ -46,7 +47,9 @@ public class MenuNavigationItemsAdapter extends RecyclerView.Adapter<MenuNavigat
     public void onBindViewHolder(MenuNavItem holder, int position) {
         MenuEntry item = navItems.get(position);
         holder.label.setText(item.getTitle());
+        holder.label.setTextColor(foregroundColour);
         holder.icon.setImageDrawable(item.getIcon());
+        holder.icon.setColorFilter(foregroundColour);
         holder.itemView.setTag(item.getResId());
 
         if (item.getTitle().equals("")) setupMoreIcon(holder);
@@ -69,6 +72,7 @@ public class MenuNavigationItemsAdapter extends RecyclerView.Adapter<MenuNavigat
         menuNavItem.itemView.setFocusable(false);
         menuNavItem.itemView.setFocusableInTouchMode(false);
         menuNavItem.itemView.setBackground(null);
+        menuNavItem.icon.setColorFilter(foregroundColour);
 
         menuNavItem.itemView.setTag(MORE_ICON_TAG);
     }

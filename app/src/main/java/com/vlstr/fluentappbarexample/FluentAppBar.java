@@ -3,19 +3,15 @@ package com.vlstr.fluentappbarexample;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.MenuRes;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 /**
  * Created by Valentin on 16/05/2017.
@@ -29,6 +25,7 @@ public class FluentAppBar extends NestedScrollView {
     private BottomSheetBehavior bottomSheetBehavior;
 
     private int backgroundColour;
+    private int foregroundColour;
 
     private OnClickListener onMoreClickListener = new OnClickListener() {
         @Override
@@ -50,7 +47,8 @@ public class FluentAppBar extends NestedScrollView {
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.FluentAppBar, 0, 0);
         try {
-            backgroundColour = a.getColor(R.styleable.FluentAppBar_fluent_background, Color.WHITE);
+            backgroundColour = a.getColor(R.styleable.FluentAppBar_fluent_background_colour, Color.WHITE);
+            foregroundColour = a.getColor(R.styleable.FluentAppBar_fluent_foreground_colour, Color.DKGRAY);
         } finally {
             a.recycle();
         }
@@ -82,13 +80,18 @@ public class FluentAppBar extends NestedScrollView {
         moreIcon.setOnClickListener(onMoreClickListener);
     }
 
-
-    public RecyclerView getMenuNavigationItemsRecycler() {
-        return (RecyclerView) findViewById(R.id.nav_items_recycler);
+    public void setNavigationMenu(@MenuRes int menuRes, OnClickListener onClickListener){
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.nav_items_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        MenuNavigationItemsAdapter adapter = new MenuNavigationItemsAdapter(getContext(), menuRes, onClickListener, foregroundColour);
+        recyclerView.setAdapter(adapter);
     }
 
-    public RecyclerView getSecondaryMenuItemsRecycler() {
-        return (RecyclerView) findViewById(R.id.secondary_menu_items_recyler);
+    public void setSecondaryMenu(@MenuRes int menuRes, OnClickListener onClickListener){
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.secondary_menu_items_recyler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        MenuSecondaryItemsAdapter adapter = new MenuSecondaryItemsAdapter(getContext(), menuRes, onClickListener, foregroundColour);
+        recyclerView.setAdapter(adapter);
     }
 
     public int getBackgroundColour() {
