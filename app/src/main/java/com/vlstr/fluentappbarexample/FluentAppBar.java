@@ -27,6 +27,9 @@ public class FluentAppBar extends NestedScrollView {
 
     public static final String MORE_ICON_TAG = "more_icon_tag";
 
+    public static final int BLUR_RADIUS = 20;
+    public static final int BACKGROUND_ALPHA = 78;
+
     private BottomSheetBehavior bottomSheetBehavior;
 
     private int backgroundColour;
@@ -42,17 +45,18 @@ public class FluentAppBar extends NestedScrollView {
             blurView.setupWith(rootView)
                     .windowBackground(windowBackground)
                     .blurAlgorithm(new RenderScriptBlur(getContext()))
-                    .blurRadius(20);
-            int transparentBackgroundColour = Color.argb(78,
+                    .blurRadius(BLUR_RADIUS);
+            int transparentBackgroundColour = Color.argb(BACKGROUND_ALPHA,
                     Color.red(backgroundColour),
                     Color.green(backgroundColour),
                     Color.blue(backgroundColour));
             blurView.setOverlayColor(transparentBackgroundColour);
 
-            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED)
+            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            else
+            } else {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
         }
     };
 
