@@ -8,6 +8,8 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:clickable="true"
+    android:focusableInTouchMode="false"
+    android:focusable="false"
     android:background="?android:attr/selectableItemBackground">
 
 
