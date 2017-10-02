@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vlstr.fluentappbarexample.MainActivity">
+    tools:context="com.vlstr.fluentappbarexample.MainActivity"
+    android:background="@drawable/foto">
 
     <com.vlstr.fluentappbarexample.FluentAppBar
         android:id="@+id/fluent_app_bar"
