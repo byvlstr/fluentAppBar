@@ -7,7 +7,7 @@
 
     <item android:id="@android:id/mask">
         <shape android:shape="rectangle" >
-            <stroke android:color="#ffffff" android:width="2dp"/>
+            <stroke android:color="#ffffff" android:width="1.5dp"/>
             <gradient android:startColor="#42ffffff" android:centerColor="#42ffffff" android:endColor="#ffffff" />
         </shape>
     </item>
