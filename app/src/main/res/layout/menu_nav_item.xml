@@ -4,9 +4,6 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusableInTouchMode="false"
-    android:focusable="false"
     android:background="@drawable/fluent_ripple">
 
     <ImageView

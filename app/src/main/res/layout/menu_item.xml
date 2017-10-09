@@ -7,9 +7,6 @@
     android:padding="5dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:clickable="true"
-    android:focusableInTouchMode="false"
-    android:focusable="false"
     android:background="@drawable/fluent_ripple">
 
 
