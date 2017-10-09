@@ -10,7 +10,7 @@
     android:clickable="true"
     android:focusableInTouchMode="false"
     android:focusable="false"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="@drawable/fluent_ripple">
 
 
     <ImageView
