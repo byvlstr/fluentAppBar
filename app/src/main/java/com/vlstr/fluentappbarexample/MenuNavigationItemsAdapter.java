@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.MenuRes;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,12 @@ public class MenuNavigationItemsAdapter extends RecyclerView.Adapter<MenuNavigat
     private Context context;
     private View.OnClickListener onClickListener;
     private int foregroundColour;
+    private boolean keepFluentRipple = true;
 
     private List<MenuEntry> navItems;
 
-    public MenuNavigationItemsAdapter(Context context, @MenuRes int menuRes, View.OnClickListener onClickListener, int foregroundColour) {
+    public MenuNavigationItemsAdapter(Context context, @MenuRes int menuRes, View.OnClickListener onClickListener,
+                                      int foregroundColour) {
         this.context = context;
         this.onClickListener = onClickListener;
         this.foregroundColour = foregroundColour;
@@ -52,7 +55,9 @@ public class MenuNavigationItemsAdapter extends RecyclerView.Adapter<MenuNavigat
         holder.icon.setColorFilter(foregroundColour);
         holder.itemView.setTag(item.getResId());
 
-        if (item.getTitle().equals("")) setupMoreIcon(holder);
+        if (item.getTitle().isEmpty()) setupMoreIcon(holder);
+
+        handleRipple(holder);
 
         holder.itemView.setOnClickListener(onClickListener);
     }
@@ -60,6 +65,23 @@ public class MenuNavigationItemsAdapter extends RecyclerView.Adapter<MenuNavigat
     @Override
     public int getItemCount() {
         return navItems.size();
+    }
+
+    public void setForegroundColour(int foregroundColour) {
+        this.foregroundColour = foregroundColour;
+    }
+
+    public void setKeepFluentRipple(boolean keepFluentRipple) {
+        this.keepFluentRipple = keepFluentRipple;
+        notifyDataSetChanged();
+    }
+
+    private void handleRipple(MenuNavigationItemsAdapter.MenuNavItem holder) {
+        if (!keepFluentRipple) {
+            TypedValue outValue = new TypedValue();
+            context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+            holder.itemView.setBackgroundResource(outValue.resourceId);
+        }
     }
 
     private void populateNavigationItems(int menuRes){

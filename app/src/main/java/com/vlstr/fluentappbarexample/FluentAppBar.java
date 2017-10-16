@@ -22,8 +22,11 @@ import eightbitlab.com.blurview.RenderScriptBlur;
  * Created by Valentin on 16/05/2017.
  */
 
-
 public class FluentAppBar extends NestedScrollView {
+
+    public static final int DISABLE_FLUENT = 0;
+    public static final int TOUCH_FLUENT = 50;
+    public static final int FULL_FLUENT = 100;
 
     public static final String MORE_ICON_TAG = "more_icon_tag";
 
@@ -34,31 +37,11 @@ public class FluentAppBar extends NestedScrollView {
 
     private int backgroundColour;
     private int foregroundColour;
+    private int fluentAppBarType;
+    private boolean keepFluentRipple;
 
-    private OnClickListener onMoreClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            setBackground(null);
-            final ViewGroup rootView = (ViewGroup) getRootView();
-            final Drawable windowBackground = getBackground();
-            BlurView blurView = (BlurView) findViewById(R.id.blurview);
-            blurView.setupWith(rootView)
-                    .windowBackground(windowBackground)
-                    .blurAlgorithm(new RenderScriptBlur(getContext()))
-                    .blurRadius(BLUR_RADIUS);
-            int transparentBackgroundColour = Color.argb(BACKGROUND_ALPHA,
-                    Color.red(backgroundColour),
-                    Color.green(backgroundColour),
-                    Color.blue(backgroundColour));
-            blurView.setOverlayColor(transparentBackgroundColour);
-
-            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            } else {
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        }
-    };
+    private MenuSecondaryItemsAdapter menuSecondaryItemsAdapter;
+    private MenuNavigationItemsAdapter menuNavigationItemsAdapter;
 
     public FluentAppBar(Context context) {
         super(context);
@@ -72,6 +55,7 @@ public class FluentAppBar extends NestedScrollView {
         try {
             backgroundColour = a.getColor(R.styleable.FluentAppBar_fluent_background_colour, Color.WHITE);
             foregroundColour = a.getColor(R.styleable.FluentAppBar_fluent_foreground_colour, Color.DKGRAY);
+            fluentAppBarType = a.getInt(R.styleable.FluentAppBar_fluent_app_bar_type, TOUCH_FLUENT);
         } finally {
             a.recycle();
         }
@@ -83,8 +67,9 @@ public class FluentAppBar extends NestedScrollView {
         setClipToPadding(true);
         setBackgroundColor(backgroundColour);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setElevation(getResources().getDimension(R.dimen.bar_elevation));
+        }
 
         LayoutInflater.from(getContext()).inflate(R.layout.content_app_bar, this, true);
     }
@@ -100,20 +85,34 @@ public class FluentAppBar extends NestedScrollView {
 
         View moreIcon = findViewWithTag(MORE_ICON_TAG);
         moreIcon.setOnClickListener(onMoreClickListener);
+
+        if (fluentAppBarType == FULL_FLUENT) {
+            handleShowFluentBlur();
+        }
+
+        if (fluentAppBarType == DISABLE_FLUENT) {
+            keepFluentRipple = false;
+        }
     }
+
+    ///// ********************************************** /////
+    ///// *********    PUBLIC APIS/METHODS    ********** /////
+    ///// ********************************************** /////
 
     public void setNavigationMenu(@MenuRes int menuRes, OnClickListener onClickListener) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.nav_items_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        MenuNavigationItemsAdapter adapter = new MenuNavigationItemsAdapter(getContext(), menuRes, onClickListener, foregroundColour);
-        recyclerView.setAdapter(adapter);
+        menuNavigationItemsAdapter = new MenuNavigationItemsAdapter(getContext(), menuRes, onClickListener,
+                foregroundColour);
+        recyclerView.setAdapter(menuNavigationItemsAdapter);
     }
 
     public void setSecondaryMenu(@MenuRes int menuRes, OnClickListener onClickListener) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.secondary_menu_items_recyler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        MenuSecondaryItemsAdapter adapter = new MenuSecondaryItemsAdapter(getContext(), menuRes, onClickListener, foregroundColour);
-        recyclerView.setAdapter(adapter);
+        menuSecondaryItemsAdapter = new MenuSecondaryItemsAdapter(getContext(), menuRes, onClickListener,
+                foregroundColour);
+        recyclerView.setAdapter(menuSecondaryItemsAdapter);
     }
 
     public int getBackgroundColour() {
@@ -124,5 +123,91 @@ public class FluentAppBar extends NestedScrollView {
         this.backgroundColour = backgroundColour;
         this.setBackgroundColor(backgroundColour);
     }
+
+    public int getForegroundColour() {
+        return foregroundColour;
+    }
+
+    public void setForegroundColour(int foregroundColour) {
+        this.foregroundColour = foregroundColour;
+
+        menuNavigationItemsAdapter.setForegroundColour(foregroundColour);
+        menuNavigationItemsAdapter.notifyDataSetChanged();
+
+        menuSecondaryItemsAdapter.setForegroundColour(foregroundColour);
+        menuSecondaryItemsAdapter.notifyDataSetChanged();
+    }
+
+    public int getFluentAppBarType() {
+        return fluentAppBarType;
+    }
+
+    public void setFluentAppBarType(int fluentAppBarType) {
+        this.fluentAppBarType = fluentAppBarType;
+        menuNavigationItemsAdapter.setForegroundColour(foregroundColour);
+        menuNavigationItemsAdapter.notifyDataSetChanged();
+
+        menuSecondaryItemsAdapter.setForegroundColour(foregroundColour);
+        menuSecondaryItemsAdapter.notifyDataSetChanged();
+    }
+
+    public boolean isFluentRipple() {
+        return keepFluentRipple;
+    }
+
+    public void setKeepFluentRipple(boolean keepFluentRipple) {
+        this.keepFluentRipple = keepFluentRipple;
+    }
+
+    public void collapse() {
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        }, 500);
+    }
+
+    public void collapseWithoutDelay() {
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    public void expand() {
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
+
+    ///// ********************************************** /////
+    ///// *********    END OF APIS/METHODS    ********** /////
+    ///// ********************************************** /////
+
+
+    private OnClickListener onMoreClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            } else {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        }
+    };
+
+    private void handleShowFluentBlur() {
+        setBackground(null);
+        final ViewGroup rootView = (ViewGroup) getRootView();
+        final Drawable windowBackground = getBackground();
+        BlurView blurView = (BlurView) findViewById(R.id.blurview);
+        blurView.setupWith(rootView)
+                .windowBackground(windowBackground)
+                .blurAlgorithm(new RenderScriptBlur(getContext()))
+                .blurRadius(BLUR_RADIUS);
+        int transparentBackgroundColour = Color.argb(BACKGROUND_ALPHA,
+                Color.red(backgroundColour),
+                Color.green(backgroundColour),
+                Color.blue(backgroundColour));
+        blurView.setOverlayColor(transparentBackgroundColour);
+    }
+
 }
 

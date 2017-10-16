@@ -3,6 +3,7 @@ package com.vlstr.fluentappbarexample;
 import android.content.Context;
 import android.support.annotation.MenuRes;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,12 @@ public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondar
     private Context context;
     private View.OnClickListener onClickListener;
     private int foregroundColour;
+    private boolean keepFluentRipple = true;
 
     private ArrayList<MenuEntry> itemss;
 
-    public MenuSecondaryItemsAdapter(Context context, @MenuRes int secondaryMenuId, View.OnClickListener onClickListener, int foregroundColour) {
+    public MenuSecondaryItemsAdapter(Context context, @MenuRes int secondaryMenuId, View.OnClickListener onClickListener,
+                                     int foregroundColour) {
         this.context = context;
         this.onClickListener = onClickListener;
         this.foregroundColour = foregroundColour;
@@ -47,6 +50,8 @@ public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondar
         holder.icon.setColorFilter(foregroundColour);
         holder.itemView.setTag(itemss.get(position).getResId());
 
+        handleRipple(holder);
+
         holder.itemView.setOnClickListener(onClickListener);
     }
 
@@ -55,6 +60,23 @@ public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondar
         return itemss.size();
     }
 
+
+    public void setForegroundColour(int foregroundColour) {
+        this.foregroundColour = foregroundColour;
+    }
+
+    public void setKeepFluentRipple(boolean keepFluentRipple) {
+        this.keepFluentRipple = keepFluentRipple;
+        notifyDataSetChanged();
+    }
+
+    private void handleRipple(MenuItem holder) {
+        if (!keepFluentRipple) {
+            TypedValue outValue = new TypedValue();
+            context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+            holder.itemView.setBackgroundResource(outValue.resourceId);
+        }
+    }
 
     class MenuItem extends RecyclerView.ViewHolder {
         ImageView icon;

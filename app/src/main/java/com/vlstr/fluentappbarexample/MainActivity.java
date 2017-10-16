@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private FluentAppBar fluentAppBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setupFluentAppBar() {
-        FluentAppBar fluentAppBar = (FluentAppBar) findViewById(R.id.fluent_app_bar);
+        fluentAppBar = (FluentAppBar) findViewById(R.id.fluent_app_bar);
         fluentAppBar.setNavigationMenu(R.menu.fluent_app_bar_main_menu, this);
         fluentAppBar.setSecondaryMenu(R.menu.fluent_app_bar_secondary_menu, this);
     }
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //Navigation Menu
             case R.id.nav_ellipsis:
                 Toast.makeText(MainActivity.this, "ELLIPSIS", Toast.LENGTH_SHORT).show();
+                fluentAppBar.collapse();
                 break;
             case R.id.nav_more:
                 Toast.makeText(MainActivity.this, "MORE", Toast.LENGTH_SHORT).show();
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // Secondary Menu
             case R.id.menu_more:
                 Toast.makeText(MainActivity.this, "More", Toast.LENGTH_SHORT).show();
+                fluentAppBar.collapse();
                 break;
             case R.id.menu_ellipsis:
                 Toast.makeText(MainActivity.this, "Ellipsis", Toast.LENGTH_SHORT).show();
