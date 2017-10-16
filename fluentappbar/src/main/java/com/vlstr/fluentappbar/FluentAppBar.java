@@ -31,8 +31,8 @@ public class FluentAppBar extends NestedScrollView {
 
     public static final String MORE_ICON_TAG = "more_icon_tag";
 
-    public static final int BLUR_RADIUS = 20;
-    public static final int BACKGROUND_ALPHA = 78;
+    private int blurRadius = 20;
+    private int backgroundAlpha = 78;
 
     private BottomSheetBehavior bottomSheetBehavior;
 
@@ -162,6 +162,22 @@ public class FluentAppBar extends NestedScrollView {
         menuSecondaryItemsAdapter.setKeepFluentRipple(keepFluentRipple);
     }
 
+    public void setBlurRadius(int blurRadius) {
+        this.blurRadius = blurRadius;
+    }
+
+    public int getBlurRadius() {
+        return blurRadius;
+    }
+
+    public int getBackgroundAlpha() {
+        return backgroundAlpha;
+    }
+
+    public void setBackgroundAlpha(int backgroundAlpha) {
+        this.backgroundAlpha = backgroundAlpha;
+    }
+
     public void collapse() {
         postDelayed(new Runnable() {
             @Override
@@ -204,8 +220,8 @@ public class FluentAppBar extends NestedScrollView {
         blurView.setupWith(rootView)
                 .windowBackground(windowBackground)
                 .blurAlgorithm(new RenderScriptBlur(getContext()))
-                .blurRadius(BLUR_RADIUS);
-        int transparentBackgroundColour = Color.argb(BACKGROUND_ALPHA,
+                .blurRadius(blurRadius);
+        int transparentBackgroundColour = Color.argb(backgroundAlpha,
                 Color.red(backgroundColour),
                 Color.green(backgroundColour),
                 Color.blue(backgroundColour));
