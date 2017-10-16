@@ -1,6 +1,7 @@
 package com.vlstr.fluentappbar;
 
 import android.content.Context;
+import android.support.annotation.ColorInt;
 import android.support.annotation.MenuRes;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * Created by Valentin on 16/05/2017.
  */
 
-public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondaryItemsAdapter.MenuItem> {
+class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondaryItemsAdapter.MenuItem> {
 
     private Context context;
     private View.OnClickListener onClickListener;
@@ -25,8 +26,8 @@ public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondar
 
     private ArrayList<MenuEntry> itemss;
 
-    public MenuSecondaryItemsAdapter(Context context, @MenuRes int secondaryMenuId, View.OnClickListener onClickListener,
-                                     int foregroundColour) {
+    MenuSecondaryItemsAdapter(Context context, @MenuRes int secondaryMenuId, View.OnClickListener onClickListener,
+                                     @ColorInt int foregroundColour) {
         this.context = context;
         this.onClickListener = onClickListener;
         this.foregroundColour = foregroundColour;
@@ -61,7 +62,7 @@ public class MenuSecondaryItemsAdapter extends RecyclerView.Adapter<MenuSecondar
     }
 
 
-    public void setForegroundColour(int foregroundColour) {
+    public void setForegroundColour(@ColorInt int foregroundColour) {
         this.foregroundColour = foregroundColour;
     }
 

@@ -1,9 +1,12 @@
 package com.vlstr.fluentappbar;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.MenuRes;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +23,7 @@ import static com.vlstr.fluentappbar.FluentAppBar.MORE_ICON_TAG;
  * Created by Valentin on 14/06/2017.
  */
 
-public class MenuNavigationItemsAdapter extends RecyclerView.Adapter<MenuNavigationItemsAdapter.MenuNavItem> {
+class MenuNavigationItemsAdapter extends RecyclerView.Adapter<MenuNavigationItemsAdapter.MenuNavItem> {
 
     private Context context;
     private View.OnClickListener onClickListener;
@@ -29,8 +32,8 @@ public class MenuNavigationItemsAdapter extends RecyclerView.Adapter<MenuNavigat
 
     private List<MenuEntry> navItems;
 
-    public MenuNavigationItemsAdapter(Context context, @MenuRes int menuRes, View.OnClickListener onClickListener,
-                                      int foregroundColour) {
+    MenuNavigationItemsAdapter(Context context, @MenuRes int menuRes, View.OnClickListener onClickListener,
+                                      @ColorInt int foregroundColour) {
         this.context = context;
         this.onClickListener = onClickListener;
         this.foregroundColour = foregroundColour;
@@ -67,7 +70,7 @@ public class MenuNavigationItemsAdapter extends RecyclerView.Adapter<MenuNavigat
         return navItems.size();
     }
 
-    public void setForegroundColour(int foregroundColour) {
+    public void setForegroundColour(@ColorInt int foregroundColour) {
         this.foregroundColour = foregroundColour;
     }
 

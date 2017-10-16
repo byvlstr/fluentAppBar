@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
  * Created by Valentin on 12/06/2017.
  */
 
-public class MenuEntry {
+class MenuEntry {
 
     private String title;
     private Drawable icon;

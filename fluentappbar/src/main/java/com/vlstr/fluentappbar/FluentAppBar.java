@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.annotation.MenuRes;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.widget.NestedScrollView;
@@ -119,7 +120,7 @@ public class FluentAppBar extends NestedScrollView {
         return backgroundColour;
     }
 
-    public void setBackgroundColour(int backgroundColour) {
+    public void setBackgroundColour(@ColorInt int backgroundColour) {
         this.backgroundColour = backgroundColour;
         this.setBackgroundColor(backgroundColour);
     }
@@ -128,7 +129,7 @@ public class FluentAppBar extends NestedScrollView {
         return foregroundColour;
     }
 
-    public void setForegroundColour(int foregroundColour) {
+    public void setForegroundColour(@ColorInt int foregroundColour) {
         this.foregroundColour = foregroundColour;
 
         menuNavigationItemsAdapter.setForegroundColour(foregroundColour);
@@ -157,6 +158,8 @@ public class FluentAppBar extends NestedScrollView {
 
     public void setKeepFluentRipple(boolean keepFluentRipple) {
         this.keepFluentRipple = keepFluentRipple;
+        menuNavigationItemsAdapter.setKeepFluentRipple(keepFluentRipple);
+        menuSecondaryItemsAdapter.setKeepFluentRipple(keepFluentRipple);
     }
 
     public void collapse() {
