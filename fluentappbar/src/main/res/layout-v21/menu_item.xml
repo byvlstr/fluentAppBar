@@ -7,7 +7,7 @@
     android:padding="5dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="@drawable/fluent_ripple">
 
 
     <ImageView

@@ -156,7 +156,7 @@ public class FluentAppBar extends NestedScrollView {
         return keepFluentRipple;
     }
 
-    public void setKeepFluentRipple(boolean keepFluentRipple) {
+    public void setFluentRipple(boolean keepFluentRipple) {
         this.keepFluentRipple = keepFluentRipple;
         menuNavigationItemsAdapter.setKeepFluentRipple(keepFluentRipple);
         menuSecondaryItemsAdapter.setKeepFluentRipple(keepFluentRipple);
