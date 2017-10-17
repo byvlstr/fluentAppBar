@@ -2,4 +2,7 @@
 <resources>
     <dimen name="bar_height">52dp</dimen>
     <dimen name="bar_elevation">24dp</dimen>
+
+    <dimen name="icon_padding">15dp</dimen>
+    <dimen name="icon_height">56dp</dimen>
 </resources>

@@ -13,7 +13,8 @@
     <ImageView
         android:id="@+id/menu_item_icon"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/icon_height"
+        android:padding="5dp"
         android:layout_weight="1.5" />
 
     <TextView
