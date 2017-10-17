@@ -32,3 +32,32 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.eightbitlab:blurview:1.3.3'
 }
+
+ext {
+    bintrayRepo = 'maven' //the maven repo name (created on bintray)
+    bintrayName = 'FluentAppBar' //the name you want to give at your project on bintray
+    orgName = 'vlstr' //your user name
+
+    publishedGroupId = 'com.vlstr' //aaaa : the librairy group
+    artifact = 'fluentappbar' //BBBB : the library name
+    libraryVersion = "1.0.0" //the librairy version
+
+    //the library will be : aaaa:BBBB:version
+
+    libraryName = 'FluentAppBar'
+    libraryDescription = 'Use the most powerful bottom sheet ever: the Fluent App Bar! Using the Fluent Design System or not, FluentAppBar is a bottom navigation bar and a menu in one widget. 2 in 1.'
+
+    siteUrl = 'https://github.com/byvlstr/fluentAppBar'
+    gitUrl = 'https://github.com/byvlstr/fluentAppBar.git'
+
+    developerId = 'vlstr'
+    developerName = 'Valentin Lungenstrass'
+    developerEmail = 'contact@vlstr.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: rootProject.file('gradle/install-v1.gradle')
+apply from: rootProject.file('gradle/bintray-android-v1.gradle')
