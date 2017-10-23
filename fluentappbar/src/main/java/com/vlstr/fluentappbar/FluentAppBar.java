@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.MenuRes;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,7 +28,7 @@ import eightbitlab.com.blurview.RenderScriptBlur;
 public class FluentAppBar extends NestedScrollView {
 
     public static final int DISABLE_FLUENT = 0;
-    public static final int TOUCH_FLUENT = 50;
+    public static final int CLICK_FLUENT = 50;
     public static final int FULL_FLUENT = 100;
 
     public static final String MORE_ICON_TAG = "more_icon_tag";
@@ -57,7 +58,7 @@ public class FluentAppBar extends NestedScrollView {
         try {
             backgroundColour = a.getColor(R.styleable.FluentAppBar_fluent_background_colour, Color.WHITE);
             foregroundColour = a.getColor(R.styleable.FluentAppBar_fluent_foreground_colour, Color.DKGRAY);
-            fluentAppBarType = a.getInt(R.styleable.FluentAppBar_fluent_app_bar_type, TOUCH_FLUENT);
+            fluentAppBarType = a.getInt(R.styleable.FluentAppBar_fluent_app_bar_type, FULL_FLUENT);
         } finally {
             a.recycle();
         }
@@ -83,7 +84,7 @@ public class FluentAppBar extends NestedScrollView {
         bottomSheetBehavior = BottomSheetBehavior.from(this);
         bottomSheetBehavior.setPeekHeight((int) getResources().getDimension(R.dimen.fluentappbar_bar_height));
         bottomSheetBehavior.setHideable(false);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        bottomSheetBehavior.setBottomSheetCallback(bottomSheetCallback);
 
         View moreIcon = findViewWithTag(MORE_ICON_TAG);
         moreIcon.setOnClickListener(onMoreClickListener);
@@ -213,6 +214,24 @@ public class FluentAppBar extends NestedScrollView {
         }
     };
 
+    private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
+        @Override
+        public void onStateChanged(@NonNull View bottomSheet, int newState) {
+            if (fluentAppBarType == CLICK_FLUENT) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    handleShowFluentBlur();
+                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    BlurView blurView = (BlurView) findViewById(R.id.blurview);
+                    blurView.setBlurEnabled(false);
+                    setBackgroundColor(backgroundColour);
+                }
+            }
+        }
+
+        @Override
+        public void onSlide(@NonNull View bottomSheet, float slideOffset) {}
+    };
+
     private void handleShowFluentBlur() {
         setBackground(null);
         final ViewGroup rootView = (ViewGroup) getRootView();
@@ -227,8 +246,6 @@ public class FluentAppBar extends NestedScrollView {
                 Color.green(backgroundColour),
                 Color.blue(backgroundColour));
         blurView.setOverlayColor(transparentBackgroundColour);
-
-        Log.d("TAG", "Show Blur");
     }
 
 }
