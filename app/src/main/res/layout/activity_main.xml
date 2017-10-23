@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vlstr.fluentappbarexample.MainActivity"
-    android:background="@drawable/foto">
+    tools:context="com.vlstr.fluentappbarexample.MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <com.vlstr.fluentappbar.FluentAppBar
         android:id="@+id/fluent_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:fluent_background_colour="@color/colorAccent"
-        app:fluent_foreground_colour="#ffffff"
+        app:fluent_background_colour="@color/colorPrimary"
+        app:fluent_foreground_colour="#FFFFFF"
         app:fluent_app_bar_type="FULL_FLUENT"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
