@@ -45,7 +45,6 @@ And integrate the FluentAppBar this way:
 
 ```java
 MainActivity.java
-
 ---
 
 private void setupFluentAppBar() {
@@ -137,12 +136,13 @@ Each of the following has got getter/setter methods. Also, the type, background 
 * Navigation Menu: provide the icons and title for the navigation menu
 * Secondary menu
 * Type: 3 types are available to you
-      + FULL_FLUENT: the fluent blur is always enabled
-      + CLICK_FLUENT: the blur is enabled when the FluentAppBar is expanded
-      + DISABLE_FLUENT: no blur effect is being used
+  - FULL_FLUENT: the fluent blur is always enabled
+  - CLICK_FLUENT: the blur is enabled when the FluentAppBar is expanded
+  - DISABLE_FLUENT: no blur effect is being used
+
 * Background colour: specify the FluentAppBar's background colour
-      + Used as is for the DISABLE_FLUENT and CLICK_FLUENT types
-      + Made transparent according to the provided options for FULL_FLUENT and CLICK_FLUENT (when expanded) => works like a filter colour
+  - Used as is for the DISABLE_FLUENT and CLICK_FLUENT types
+  - Made transparent according to the provided options for FULL_FLUENT and CLICK_FLUENT (when expanded) => works like a filter colour
 * Foreground colour: specify the text colour and icon tint
 * Ripple style: specify whether you want to use the custom "Fluent Ripple" or keep the default Android ripple
 
@@ -152,8 +152,8 @@ Each of the following has got getter/setter methods. Also, the type, background 
 Additional customization
 These 3 customization options are done through overriding the "@dimen" resource name in your own dimens.xml file. Please name the dimensions like follows:
 * Text size
-      + Navigation menu ("fluentappbar_navigation_text_size")
-      + Secondary menu ("fluentappbar_secondary_menu_text_size")
+  - Navigation menu ("fluentappbar_navigation_text_size")
+  - Secondary menu ("fluentappbar_secondary_menu_text_size")
 * Icon size ("fluentappbar_icon_height")
 
 Additional methods
