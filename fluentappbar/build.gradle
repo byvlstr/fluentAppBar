@@ -40,12 +40,12 @@ ext {
 
     publishedGroupId = 'com.vlstr' //aaaa : the librairy group
     artifact = 'fluentappbar' //BBBB : the library name
-    libraryVersion = "1.0.0" //the librairy version
+    libraryVersion = "1.1.0" //the librairy version
 
     //the library will be : aaaa:BBBB:version
 
     libraryName = 'FluentAppBar'
-    libraryDescription = 'Use the most powerful bottom sheet ever: the Fluent App Bar! Using the Fluent Design System or not, FluentAppBar is a bottom navigation bar and a menu in one widget. 2 in 1.'
+    libraryDescription = 'Use the most powerful and beautiful bottom sheet ever: the Fluent App Bar! Using the Fluent Design System or not, FluentAppBar is a bottom navigation bar and a menu in one widget. 2 in 1.'
 
     siteUrl = 'https://github.com/byvlstr/fluentAppBar'
     gitUrl = 'https://github.com/byvlstr/fluentAppBar.git'
