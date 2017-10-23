@@ -13,7 +13,7 @@
     <ImageView
         android:id="@+id/menu_item_icon"
         android:layout_width="0dp"
-        android:layout_height="@dimen/icon_height"
+        android:layout_height="@dimen/fluentappbar_icon_height"
         android:padding="5dp"
         android:layout_weight="1.5" />
 
@@ -25,5 +25,5 @@
         android:layout_marginLeft="10dp"
         android:layout_weight="9"
         android:text="TextView"
-        android:textSize="18sp" />
+        android:textSize="@dimen/fluentappbar_secondary_menu_text_size" />
 </LinearLayout>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="bar_height">52dp</dimen>
-    <dimen name="bar_elevation">24dp</dimen>
+    <dimen name="fluentappbar_bar_height">52dp</dimen>
+    <dimen name="fluentappbar_bar_elevation">24dp</dimen>
 
-    <dimen name="icon_padding">15dp</dimen>
-    <dimen name="icon_height">56dp</dimen>
+    <dimen name="fluentappbar_icon_padding">15dp</dimen>
+    <dimen name="fluentappbar_icon_height">56dp</dimen>
+
+    <dimen name="fluentappbar_navigation_text_size">14sp</dimen>
+    <dimen name="fluentappbar_secondary_menu_text_size">18sp</dimen>
 </resources>

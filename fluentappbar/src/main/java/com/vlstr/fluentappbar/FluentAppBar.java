@@ -12,6 +12,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public class FluentAppBar extends NestedScrollView {
         setBackgroundColor(backgroundColour);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setElevation(getResources().getDimension(R.dimen.bar_elevation));
+            setElevation(getResources().getDimension(R.dimen.fluentappbar_bar_elevation));
         }
 
         LayoutInflater.from(getContext()).inflate(R.layout.content_app_bar, this, true);
@@ -80,7 +81,7 @@ public class FluentAppBar extends NestedScrollView {
         super.onLayout(changed, l, t, r, b);
 
         bottomSheetBehavior = BottomSheetBehavior.from(this);
-        bottomSheetBehavior.setPeekHeight((int) getResources().getDimension(R.dimen.bar_height));
+        bottomSheetBehavior.setPeekHeight((int) getResources().getDimension(R.dimen.fluentappbar_bar_height));
         bottomSheetBehavior.setHideable(false);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
@@ -226,6 +227,8 @@ public class FluentAppBar extends NestedScrollView {
                 Color.green(backgroundColour),
                 Color.blue(backgroundColour));
         blurView.setOverlayColor(transparentBackgroundColour);
+
+        Log.d("TAG", "Show Blur");
     }
 
 }
