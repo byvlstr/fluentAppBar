@@ -104,6 +104,7 @@ public class FluentAppBar extends NestedScrollView {
 
     public void setNavigationMenu(@MenuRes int menuRes, OnClickListener onClickListener) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.nav_items_recycler);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         menuNavigationItemsAdapter = new MenuNavigationItemsAdapter(getContext(), menuRes, onClickListener,
                 foregroundColour);
@@ -112,6 +113,7 @@ public class FluentAppBar extends NestedScrollView {
 
     public void setSecondaryMenu(@MenuRes int menuRes, OnClickListener onClickListener) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.secondary_menu_items_recyler);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         menuSecondaryItemsAdapter = new MenuSecondaryItemsAdapter(getContext(), menuRes, onClickListener,
                 foregroundColour);
