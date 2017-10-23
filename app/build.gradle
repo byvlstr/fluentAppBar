@@ -20,7 +20,6 @@ android {
 }
 
 dependencies {
-    compile project(':fluentappbar')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -30,4 +29,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.3.1'
     compile 'net.hockeyapp.android:HockeySDK:5.0.3'
+
+    compile 'com.vlstr:fluentappbar:1.1.0'
 }
