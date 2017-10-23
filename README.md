@@ -11,6 +11,8 @@ Fluent App Bar is an Android "bottom-sheet" enabling a whole new bottom navigati
 * **Inspired by:** Microsoft's [Fluent Design System](https://fluent.microsoft.com/).
 * **Many thanks to:** Dmitry Saviuk who made [BlurView](https://github.com/Dimezis/BlurView), already used for the [Blur Dialog](https://github.com/byvlstr/blurdialog)
 
+<img src="https://github.com/byvlstr/fluentAppBar/blob/master/assets/fluentappbar.gif" width=350>
+
 # Usage
 
 
@@ -85,6 +87,45 @@ public void onClick(View v) {
   }
 ```
 
+You will have to provide 2 XML Menu resource files for the navigation menu and the secondary menu.
+
+```xml
+
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ic_all"
+        android:id="@+id/nav_all"
+        android:title="All" />
+
+    <item
+        android:icon="@drawable/ic_album"
+        android:id="@+id/nav_album"
+        android:title="Albums" />
+
+    <item
+        android:icon="@drawable/ic_keywords"
+        android:id="@+id/nav_keywords"
+        android:title="Keywords" />
+</menu>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ic_sync"
+        android:id="@+id/menu_sync"
+        android:title="Show Sync Status" />
+
+    <item
+        android:icon="@drawable/ic_assistant"
+        android:id="@+id/menu_assistant"
+        android:title="Photo Assistant" />
+
+    <item
+        android:icon="@drawable/ic_shared"
+        android:id="@+id/menu_shared"
+        android:title="Shared Photos" />
+</menu>
+```
 
 # Compatibility
 This Android library is currently supported by devices with API > 17.
@@ -144,8 +185,10 @@ For Maven:
 
 # Examples
 
-![screen]()
-![screen]()
+<img src="https://github.com/byvlstr/fluentAppBar/blob/master/assets/fluent_bar.png" width=350>
+<img src="https://github.com/byvlstr/fluentAppBar/blob/master/assets/disable_or_click_fluent.png" width=350 align=right>
+<img src="https://github.com/byvlstr/fluentAppBar/blob/master/assets/disable_fluent.png" width=350>
+
 
 # Logs
 
