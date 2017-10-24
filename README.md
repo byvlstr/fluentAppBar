@@ -203,10 +203,13 @@ For Maven:
 - Initial version
 
 
+# Used by/in
+
+Feel free to contact me to have your project and name stated here
 
 # Credits
 
-Creator: Valentin Lungenstrass [http://www.vlstr.com/](http://vlstr.com/)
+Creator: Valentin Lungenstrass [http://www.vlstr.com/](http://vlstr.com/) | contact [at] vlstr [dot] com
 
 <a href="https://twitter.com/byvlstr">
   <img alt="Follow me on Twitter"
